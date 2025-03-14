@@ -8,43 +8,33 @@ function App() {
   const [date, setDate] = useState('')
   const [jobLink, setJobLink] = useState('')
   const [response, setResponse] = useState('')
-  
-  // State for job list
+
   const [jobs, setJobs] = useState([])
   
-  // State to control form visibility
   const [showForm, setShowForm] = useState(false)
 
-  // Load jobs from database on component mount
   useEffect(() => {
-    // This is where you'd fetch your jobs from a database
+    
     loadJobsFromDatabase()
   }, [])
 
-  // Function to load jobs from database
+  
   const loadJobsFromDatabase = async () => {
     try {
-      // Replace this with your actual database fetch code
-      // const response = await fetch('your-api-endpoint')
-      // const data = await response.json()
-      // setJobs(data)
       
-      // For now, using mock data
       setJobs([
-        { id: 1, company: 'Tech Corp', position: 'Frontend Developer', date: '2025-03-10', jobLink: 'https://example.com/job1' },
-        { id: 2, company: 'DevCo', position: 'React Developer', date: '2025-03-12', jobLink: 'https://example.com/job2' }
+        { id: 1, company: 'Altice Labs', position: 'Frontend Developer', date: '2025-03-10', jobLink: 'https://alticeLabs.com' }
       ])
     } catch (error) {
       console.error('Error loading jobs:', error)
     }
   }
 
-  // Function to add a new job
   const handleAddJob = async (e) => {
     e.preventDefault()
     
     const newJob = {
-      id: Date.now(), // temporary ID
+      id: Date.now(), 
       company,
       position,
       date,
@@ -63,13 +53,11 @@ function App() {
       // Update local state
       setJobs([...jobs, newJob])
       
-      // Clear form
       setCompany('')
       setPosition('')
       setDate('')
       setJobLink('')
       
-      // Hide the form after submission
       setShowForm(false)
     } catch (error) {
       console.error('Error saving job:', error)
@@ -80,7 +68,6 @@ function App() {
     <div className="app-container">
       <h1>Job Application Tracker</h1>
       
-      {/* Job Listing */}
       <div className="job-list-container">
         <div className="job-list-header">
           <h2>Your Job Applications</h2>
@@ -89,7 +76,6 @@ function App() {
           </button>
         </div>
         
-        {/* Job Entry Form - Only visible when showForm is true */}
         {showForm && (
           <div className="job-form-container">
             <form onSubmit={handleAddJob}>
@@ -137,7 +123,6 @@ function App() {
           </div>
         )}
         
-        {/* Job Table */}
         <table className="job-table">
           <thead>
             <tr>
@@ -158,11 +143,11 @@ function App() {
                   <td>{job.date}</td>
                   <td>
                     <a href={job.jobLink} target="_blank" rel="noopener noreferrer">
-                      View
+                      view 
                     </a>
                   </td>
                   <td>{job.response}
-                    <select options = {['Pending', 'Accepted', 'Rejected']} value={response} onChange={(e) => setResponse(e.target.value)} required>
+                    <select value = {job.response} onChange={(e) => updateJobResponse(job.id,e.target.value)}>
                       <option value="Pending">Pending</option>
                       <option value="Accepted">Accepted</option>
                       <option value="Rejected">Rejected</option>

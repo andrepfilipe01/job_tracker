@@ -1,4 +1,3 @@
-
 :root {
   --primary-color: #4f46e5;
   --primary-hover: #4338ca;
@@ -7,30 +6,36 @@
   --text-color: #1f2937;
   --light-text: #6b7280;
   --danger: #ef4444;
-  --success: #10b981;
   --border-radius: 8px;
   --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--text-color);
   background-color: #f9fafb;
   line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
+/* Ensure everything is at the top */
 #root {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem 2rem;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns content to the left */
+  min-height: 100vh;
 }
 
 /* Typography */
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   color: var(--primary-color);
   text-align: center;
 }
@@ -38,114 +43,79 @@ h1 {
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: var(--text-color);
 }
 
-/* Layout components */
+/* Main container */
 .app-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+  width: 100%;
+  align-items: flex-start;
 }
 
+/* Job form - Pushed to the top */
 .job-form-container {
   background-color: white;
   border-radius: var(--border-radius);
-  padding: 2rem;
+  padding: 1rem;
   box-shadow: var(--box-shadow);
+  border-left: 4px solid var(--primary-color);
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 1rem;
+  align-self: flex-start; /* Makes sure it's aligned to the top */
 }
 
+/* Job list - Takes full width, placed right after form */
 .job-list-container {
   background-color: white;
   border-radius: var(--border-radius);
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: var(--box-shadow);
-  overflow-x: auto;
+  width: 95%;
+  align-self: flex-start;
 }
 
-/* Form styling */
+
+/* Form elements */
 .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
 .form-group label {
   font-weight: 500;
   margin-bottom: 0.5rem;
-  color: var(--text-color);
 }
 
 input[type="text"],
 input[type="date"],
 input[type="url"] {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid #e5e7eb;
   border-radius: var(--border-radius);
   font-size: 1rem;
-  transition: border-color 0.15s ease-in-out;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="url"]:focus {
+input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
-/* Add these styles to your App.css file */
-
-.job-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.add-job-btn {
-  background-color: var(--primary-color);
-}
-
-.job-form-container {
-  background-color: var(--secondary-color);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-left: 4px solid var(--primary-color);
-}
-
-.empty-message {
-  text-align: center;
-  padding: 2rem;
-  color: var(--light-text);
-  font-style: italic;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.edit-btn {
-  background-color: var(--accent-color);
-}
-
-.delete-btn {
-  background-color: var(--danger);
-}
-
+/* Button styles */
 button {
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: var(--border-radius);
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
 }
 
 button:hover {
@@ -157,27 +127,23 @@ button:focus {
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
 }
 
-/* Table styling */
+/* Job table */
 .job-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.job-table th,
+.job-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .job-table th {
   background-color: var(--secondary-color);
-  padding: 1rem;
-  text-align: left;
   font-weight: 600;
-}
-
-.job-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.job-table tr:last-child td {
-  border-bottom: none;
 }
 
 .job-table a {
@@ -211,88 +177,22 @@ button:focus {
   background-color: #dc2626;
 }
 
-/* Status indicators */
-.status-pill {
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  display: inline-block;
+/* Empty state message */
+.empty-message {
+  text-align: center;
+  padding: 1rem;
+  color: var(--light-text);
+  font-style: italic;
 }
 
-.status-applied {
-  background-color: #dbeafe;
-  color: #2563eb;
-}
-
-.status-interview {
-  background-color: #fef3c7;
-  color: #d97706;
-}
-
-.status-offer {
-  background-color: #d1fae5;
-  color: #059669;
-}
-
-.status-rejected {
-  background-color: #fee2e2;
-  color: #b91c1c;
-}
-
-/* Responsiveness */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .job-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  
-  .form-group {
-    flex-direction: column;
-  }
-  
   #root {
     padding: 1rem;
   }
-}
 
-/* Logo animations (keeping from original) */
-.logo {
-  height: 3em;
-  padding: 0.75em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 1em var(--primary-color));
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 1em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .job-table {
+    display: block;
+    overflow-x: auto;
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-

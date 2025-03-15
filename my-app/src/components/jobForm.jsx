@@ -5,7 +5,8 @@ function JobForm({ onAddJob, onCancel, initialData }) {
   const [position, setPosition] = useState('');
   const [date, setDate] = useState('');
   const [jobLink, setJobLink] = useState('');
-  const  [location, setLocation] = useState('');
+  const [location, setLocation] = useState('');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     if (initialData) {
@@ -14,6 +15,7 @@ function JobForm({ onAddJob, onCancel, initialData }) {
       setPosition(initialData.position || '');
       setDate(initialData.date || '');
       setJobLink(initialData.jobLink || '');
+      setStatus(initialData.status || '');
     }
   }, [initialData]);
 
@@ -21,11 +23,12 @@ function JobForm({ onAddJob, onCancel, initialData }) {
     e.preventDefault();
     
     const jobData = {
-      id: initialData ? initialData.id : Date.now(),
+      id: initialData ? initialData.id : Date.now().toString(),
       company,
       location,
       position,
       date,
+      status,
       jobLink,
     };
     
@@ -35,6 +38,7 @@ function JobForm({ onAddJob, onCancel, initialData }) {
     setLocation('');
     setPosition('');
     setDate('');
+    setStatus('');
     setJobLink('');
   };
 
@@ -89,8 +93,7 @@ function JobForm({ onAddJob, onCancel, initialData }) {
           <input 
             type="url" 
             value={jobLink} 
-            onChange={(e) => setJobLink(e.target.value)} 
-            required 
+            onChange={(e) => setJobLink(e.target.value)}  
           />
         </div>
         

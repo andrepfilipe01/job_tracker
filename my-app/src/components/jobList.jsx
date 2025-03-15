@@ -1,7 +1,7 @@
 import React from 'react';
 import JobItem from './JobItem';
 
-function JobList({ jobs, onDeleteJob, onEditJob }) {
+function JobList({ jobs, onDeleteJob, onEditJob, onStatusChange }) {
   return (
     <div className="job-list-container">
       <table className="job-table">
@@ -24,6 +24,7 @@ function JobList({ jobs, onDeleteJob, onEditJob }) {
                 job={job} 
                 onDelete={onDeleteJob}
                 onEdit={onEditJob}
+                onStatusChange={onStatusChange}
               />
             ))
           ) : (

@@ -19,7 +19,6 @@ body {
   padding: 0;
 }
 
-/* Ensure everything is at the top */
 #root {
   width: 100%;
   max-width: 100%;
@@ -27,11 +26,10 @@ body {
   text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Aligns content to the left */
+  align-items: flex-start; 
   min-height: 100vh;
 }
 
-/* Typography */
 h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -47,7 +45,6 @@ h2 {
   color: var(--text-color);
 }
 
-/* Main container */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -56,7 +53,6 @@ h2 {
   align-items: flex-start;
 }
 
-/* Job form - Pushed to the top */
 .job-form-container {
   background-color: white;
   border-radius: var(--border-radius);
@@ -66,10 +62,9 @@ h2 {
   max-width: 600px;
   width: 100%;
   margin-bottom: 1rem;
-  align-self: flex-start; /* Makes sure it's aligned to the top */
+  align-self: flex-start; 
 }
 
-/* Job list - Takes full width, placed right after form */
 .job-list-container {
   background-color: white;
   border-radius: var(--border-radius);
@@ -79,8 +74,6 @@ h2 {
   align-self: flex-start;
 }
 
-
-/* Form elements */
 .form-group {
   margin-bottom: 0.75rem;
   display: flex;
@@ -107,7 +100,6 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
-/* Button styles */
 button {
   background-color: var(--primary-color);
   color: white;
@@ -127,7 +119,6 @@ button:focus {
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
 }
 
-/* Job table */
 .job-table {
   width: 100%;
   border-collapse: collapse;
@@ -155,7 +146,6 @@ button:focus {
   text-decoration: underline;
 }
 
-/* Action buttons */
 .action-buttons {
   display: flex;
   gap: 0.5rem;
@@ -177,7 +167,6 @@ button:focus {
   background-color: #dc2626;
 }
 
-/* Empty state message */
 .empty-message {
   text-align: center;
   padding: 1rem;
@@ -185,7 +174,6 @@ button:focus {
   font-style: italic;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   #root {
     padding: 1rem;

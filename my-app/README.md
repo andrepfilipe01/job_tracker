@@ -42,5 +42,3 @@ Applying for jobs can be overwhelming, especially when managing multiple applica
 - Add filtering and sorting options.
 - Integrate with external job boards (LinkedIn, Indeed, etc.).
 
-## License
-This project is open-source and available under the MIT License.

@@ -3,7 +3,7 @@ import React from 'react';
 function JobItem({ job, onDelete, onEdit, onStatusChange }) {
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
-    onStatusChange(job.id, newStatus);
+    onStatusChange(job._id, newStatus);
   };
 
   return (
@@ -25,8 +25,8 @@ function JobItem({ job, onDelete, onEdit, onStatusChange }) {
         </select>
       </td>
       <td className="action-buttons">
+        <button className="delete-btn" onClick={() => onDelete(job._id)}>Delete</button> {/* Fixed */}
         <button className="edit-btn" onClick={() => onEdit(job)}>Edit</button>
-        <button className="delete-btn" onClick={() => onDelete(job.id)}>Delete</button>
       </td>
     </tr>
   );

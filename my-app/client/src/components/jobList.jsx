@@ -20,7 +20,7 @@ function JobList({ jobs, onDeleteJob, onEditJob, onStatusChange }) {
           {jobs.length > 0 ? (
             jobs.map(job => (
               <JobItem 
-                key={job.id} 
+                key={job._id} 
                 job={job} 
                 onDelete={onDeleteJob}
                 onEdit={onEditJob}

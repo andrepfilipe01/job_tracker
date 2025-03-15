@@ -23,7 +23,7 @@ function JobForm({ onAddJob, onCancel, initialData }) {
     e.preventDefault();
     
     const jobData = {
-      id: initialData ? initialData.id : Date.now().toString(),
+      _id: initialData ? initialData._id : Date.now().toString(),
       company,
       location,
       position,

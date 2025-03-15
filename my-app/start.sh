@@ -3,18 +3,23 @@
 # Set working directory to the script's location
 cd "$(dirname "$0")"
 
-echo "Setting up MongoDB container..."
-docker run -d --name mongo-container -p 27017:27017 \
-  -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=secret \
-  mongo:latest
-
-# Check if MongoDB container started successfully
-if [ $? -eq 0 ]; then
-  echo "MongoDB container started successfully"
+echo "Checking if MongoDB container exists..."
+if [ "$(docker ps -a | grep mongo-container)" ]; then
+  echo "MongoDB container already exists"
+  
+  # Check if container is running
+  if [ "$(docker ps | grep mongo-container)" ]; then
+    echo "MongoDB container is already running"
+  else
+    echo "Starting existing MongoDB container..."
+    docker start mongo-container
+  fi
 else
-  echo "Failed to start MongoDB container. Container might already exist or port 27017 is in use."
-  echo "Try: docker rm -f mongo-container (to remove existing container)"
+  echo "Creating and starting new MongoDB container..."
+  docker run -d --name mongo-container -p 27017:27017 \
+    -e MONGO_INITDB_ROOT_USERNAME=admin \
+    -e MONGO_INITDB_ROOT_PASSWORD=secret \
+    mongo:latest
 fi
 
 # Set up client

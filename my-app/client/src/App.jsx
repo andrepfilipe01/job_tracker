@@ -3,12 +3,18 @@ import "./App.css";
 import Header from "./components/header";
 import JobForm from "./components/jobForm";
 import JobList from "./components/jobList";
+import JobFilter from "./components/jobFilter";
 import api from "./api/jobs";
 
 function App() {
   const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
+  const [filters, setFilters] = useState({
+    searchTerm: '',
+    filterBy: 'all'
+  });
 
   // Fetch Jobs from MongoDB
   useEffect(() => {
@@ -16,6 +22,7 @@ function App() {
       try {
         const response = await api.get("/"); 
         setJobs(response.data);
+        setFilteredJobs(response.data);
       } catch (error) {
         console.error("Error fetching jobs", error);
       }
@@ -23,6 +30,42 @@ function App() {
     fetchJobs();
   }, []);
   
+  useEffect(() => {
+    applyFilters();
+  }, [jobs, filters]);
+
+  const applyFilters = () => {
+    const { searchTerm, filterBy } = filters;
+    
+    if (!searchTerm.trim()) {
+      setFilteredJobs(jobs);
+      return;
+    }
+
+    const filtered = jobs.filter(job => {
+      const term = searchTerm.toLowerCase();
+      
+      if (filterBy === 'all') {
+        return (
+          job.company.toLowerCase().includes(term) ||
+          job.location.toLowerCase().includes(term) ||
+          job.position.toLowerCase().includes(term) ||
+          job.status.toLowerCase().includes(term)
+        );
+      }
+    
+      return job[filterBy === 'company' ? 'company' :
+             filterBy === 'location' ? 'location' :
+             filterBy === 'position' ? 'position' : 'status']
+        .toLowerCase().includes(term);
+    });
+
+    setFilteredJobs(filtered);
+  };
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+  };
 
   const handleAddJob = async (jobData) => {
     if (editingJob) {
@@ -65,15 +108,13 @@ function App() {
   };
 
   const handleDeleteJob = async (_id) => {
-    console.log("🛠️ Attempting to delete job with _id:", _id); // Debugging log
-  
     if (!_id) {
       console.error("❌ Error: _id is undefined. Check if JobItem is passing the correct _id.");
       return;
     }
   
     try {
-      await api.delete(`/${_id}`);  // ✅ FIXED: Removed extra `/jobs`
+      await api.delete(`/${_id}`);
       setJobs(jobs.filter((job) => job._id !== _id));
     } catch (error) {
       console.error("❌ Error deleting job", error);
@@ -129,7 +170,14 @@ function App() {
         />
       )}
 
-      <JobList jobs={jobs} onDeleteJob={handleDeleteJob} onEditJob={handleEditJob} onStatusChange={handleStatusChange} />
+      <JobFilter onFilterChange={handleFilterChange} />
+
+      <JobList 
+        jobs={filteredJobs} 
+        onDeleteJob={handleDeleteJob} 
+        onEditJob={handleEditJob} 
+        onStatusChange={handleStatusChange} 
+      />
     </div>
   );
 }

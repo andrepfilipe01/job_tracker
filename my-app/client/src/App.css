@@ -184,3 +184,39 @@ button:focus {
     overflow-x: auto;
   }
 }
+
+.job-filter {
+  display: flex;
+  margin: 20px 0;
+  gap: 10px;
+  max-width: 100%;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #070707;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.filter-select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: rgb(16, 16, 16);
+}
+
+.search-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: #6e9eff;
+  box-shadow: 0 0 5px rgba(110, 158, 255, 0.3);
+}
+
+@media (max-width: 600px) {
+  .job-filter {
+    flex-direction: column;
+  }
+}
